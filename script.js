@@ -11,6 +11,7 @@ const CALC = {
     'btn_8',
     'btn_9',
     'btn_backspace',
+    'btn_AC',
     'btn_divide',
     'btn_multiply',
     'btn_subtract',
@@ -79,6 +80,11 @@ let equation = {
         let target = this.activeTerm();
         target.innerText = target.innerText.slice(0,target.innerText.length-1);
     },
+    clearAll: function(){
+        this.firstTerm.innerText = ''
+        this.operation.innerText = ''
+        this.secondTerm.innerText = ''
+    },
     calcInput: function(inputRequest){
         const operationRegex = /\+|\-|\/|\*/
         switch(inputRequest){
@@ -90,6 +96,9 @@ let equation = {
             case 'Backspace':
                 this.backspace()
                 break;
+            case 'AC':
+                this.clearAll();
+                break;
             case '.':
                 if(this.activeTerm().innerText.match(/\./)){
                     return
@@ -98,13 +107,16 @@ let equation = {
         }
         if(inputRequest.match(operationRegex)){
             if(this.activeTerm() == this.secondTerm){
-                this.operate()
+                this.operate() //operates existing numbers before adding extra.
             };
+
+            //adds '-' to start of new numbers
             if(this.activeTerm() == this.operation && inputRequest == '-'){
                 this.secondTerm.innerText += inputRequest;
             }else if(this.activeTerm() == this.firstTerm && !(this.firstTerm.innerText) && inputRequest == '-'){
                 this.firstTerm.innerText += inputRequest;
             }else{this.operation.innerText = inputRequest;}
+        
         }else if(inputRequest.match(/[0-9]|\./)){
             if(this.activeTerm() == this.operation){
                 this.secondTerm.innerText += inputRequest

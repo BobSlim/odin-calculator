@@ -11,10 +11,15 @@
 <body>
     <div class = 'numPad'>
         <div id = 'ui'>
-            <span id = 'firstTerm'>1</span>
-            <span id = 'operation'>+</span>
-            <span id = 'secondTerm'>1</span>
+            <section class="prevLine">
+                <span id = 'firstTerm'>1</span>
+                <span id = 'operation'>+</span>
+            </section>
+            <section class="currentLine">
+                <span id = 'secondTerm'>1</span>
+            </section>
         </div>
+        <button class = 'operator' id = 'btn_AC'>AC</button>
         <button class = 'operator' id = 'btn_backspace'>&lt;-</button>
         <button class = 'operator' id = 'btn_divide'>/</button>
         <button class = 'operator' id = 'btn_multiply'>*</button>
